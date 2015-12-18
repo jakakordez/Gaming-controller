@@ -223,7 +223,7 @@ __ALIGN_BEGIN static uint8_t HID_MOUSE_ReportDesc[HID_MOUSE_REPORT_DESC_SIZE]  _
       0xA1,   0x00, // COLLECTION (Physical)
       0x05,   0x09, // USAGE_PAGE (Button)
       0x19,   0x01, // USAGE_MINIMUM (Button 1)
-      0x19,   0x10, // USAGE_MAXIMUM (Button 3)
+      0x19,   0x10, // USAGE_MAXIMUM (Button 16)
  
       0x15,   0x00, // LOGICAL_MINIMUM (0)
       0x25,   0x01, // LOGICAL_MAXIMUM (1)
@@ -235,11 +235,15 @@ __ALIGN_BEGIN static uint8_t HID_MOUSE_ReportDesc[HID_MOUSE_REPORT_DESC_SIZE]  _
       0x05,   0x01, // USAGE_PAGE (Generic Desktop)
       0x09,   0x30, // USAGE (X)
       0x09,   0x31, // USAGE (Y)
+			0x09,   0x36, // USAGE (SLIDER)
+      0x09,   0x38, // USAGE (WHEEL)
+			0x09,   0x33, // USAGE (RX)
+      0x09,   0x34, // USAGE (RY)
  
       0x15,   0x81, // LOGICAL_MINIMUM (-127)
       0x25,   0x7F, // LOGICAL_MAXIMUM (127)
       0x75,   0x08, // REPORT_SIZE (8)
-      0x95,   0x02, // REPORT_COUNT (2)
+      0x95,   0x06, // REPORT_COUNT (6)
  
       0x81,   0x02, // INPUT (Data,Var,Abs)
       0xC0,   0xC0  // END_COLLECTION x2

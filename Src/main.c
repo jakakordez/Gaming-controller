@@ -109,7 +109,7 @@ int main(void)
   MX_USB_DEVICE_Init();
 
   /* USER CODE BEGIN 2 */
-	uint8_t HIDBuffer[4];
+	uint8_t HIDBuffer[8];
 	HAL_ADC_Start(&hadc1);
 	BSP_ACCELERO_Init();
 	int16_t accData[3];
@@ -130,10 +130,10 @@ int main(void)
 		HIDBuffer[0] = ~(GPIOD->IDR&0x00FF);
 		HIDBuffer[1] = ~(((GPIOD->IDR&0x0F00)|(GPIOB->IDR&0xF000))>>8);
 		HIDBuffer[2] = (uint8_t) (accData[0]>>8);
-		HIDBuffer[3] = (uint8_t) (accData[1]>>8);
+		HIDBuffer[3] = (uint8_t) (accData[2]>>8);
 		//HIDBuffer[3] = (uint8_t) (ad>>4);
-		USBD_HID_SendReport(&hUsbDeviceFS, HIDBuffer, 4);
-		HAL_Delay(50);
+		USBD_HID_SendReport(&hUsbDeviceFS, HIDBuffer, 8);
+		HAL_Delay(30);
 		BSP_LED_Toggle(LED_BLUE);
 
   }
