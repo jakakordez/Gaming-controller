@@ -7,16 +7,16 @@ You can use 16 buttons, 4 rotary encoders, 8 ADC channels or onboard acceleromet
 
 ## Input buttons
 
-| Button | Pin    ||Button  | Pin    |
-| ------ |:------:||:------:|:------:|
-| 1      | PD 0   || 9      | PD 8   |
-| 2      | PD 1   || 10     | PD 9   |
-| 3      | PD 2   || 11     | PD 10  |
-| 4      | PD 3   || 12     | PD 11  |
-| 5      | PD 4   || 13     | PB 12  |
-| 6      | PD 5   || 14     | PB 13  |
-| 7      | PD 6   || 15     | PB 14  |
-| 8      | PD 7   || 16     | PB 15  |
+| Button | Pin    |Button  | Pin    |
+| ------ |:------:|:------:|:------:|
+| 1      | PD 0   | 9      | PD 8   |
+| 2      | PD 1   | 10     | PD 9   |
+| 3      | PD 2   | 11     | PD 10  |
+| 4      | PD 3   | 12     | PD 11  |
+| 5      | PD 4   | 13     | PB 12  |
+| 6      | PD 5   | 14     | PB 13  |
+| 7      | PD 6   | 15     | PB 14  |
+| 8      | PD 7   | 16     | PB 15  |
 
 ## Rotary encoders
 

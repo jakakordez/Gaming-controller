@@ -346,7 +346,7 @@
           </ArmAdsMisc>
           <Cads>
             <interw>1</interw>
-            <Optim>4</Optim>
+            <Optim>1</Optim>
             <oTime>0</oTime>
             <SplitLS>0</SplitLS>
             <OneElfS>1</OneElfS>
@@ -364,7 +364,7 @@
               <MiscControls>--C99</MiscControls>
               <Define>USE_HAL_DRIVER,STM32F303xC</Define>
               <Undefine></Undefine>
-              <IncludePath>..\Inc;..\Drivers\STM32F3xx_HAL_Driver\Inc;..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc;..\Middlewares\ST\STM32_USB_Device_Library\Class\HID\Inc;..\Drivers\CMSIS\Include;..\Drivers\CMSIS\Device\ST\STM32F3xx\Include;..\Drivers\Common;..\Drivers\lsm303dlhc;..\Drivers\BSP</IncludePath>
+              <IncludePath>..\Inc;..\Drivers\STM32F3xx_HAL_Driver\Inc;..\Middlewares\ST\STM32_USB_Device_Library\Core\Inc;..\Middlewares\ST\STM32_USB_Device_Library\Class\HID\Inc;..\Middlewares\ST\STM32_USB_Device_Library\Class\CDC\Inc;..\Drivers\CMSIS\Include;..\Drivers\CMSIS\Device\ST\STM32F3xx\Include;..\Drivers\Common;..\Drivers\lsm303dlhc;..\Drivers\BSP</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -471,6 +471,11 @@
               <FileName>i2c.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Src\i2c.c</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_cdc_if.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Src\usbd_cdc_if.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -611,6 +616,11 @@
               <FileName>usbd_ctlreq.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Middlewares\ST\STM32_USB_Device_Library\Core\Src\usbd_ctlreq.c</FilePath>
+            </File>
+            <File>
+              <FileName>usbd_cdc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Middlewares\ST\STM32_USB_Device_Library\Class\CDC\Src\usbd_cdc.c</FilePath>
             </File>
           </Files>
         </Group>

@@ -41,6 +41,8 @@
 
 /* USER CODE BEGIN Includes */
 #include "usbd_hid.h"
+#include "usbd_cdc.h"
+#include "usbd_cdc_if.h"
 #include "stm32f3_discovery_accelerometer.h"
 /* USER CODE END Includes */
 
@@ -96,7 +98,7 @@ int main(void)
   SystemClock_Config();
 
   /* Initialize all configured peripherals */
-  MX_GPIO_Init();
+  /*MX_GPIO_Init();
   MX_ADC1_Init();
   MX_I2C1_Init();
   MX_TIM1_Init();
@@ -105,14 +107,16 @@ int main(void)
   MX_TIM6_Init();
   MX_TIM7_Init();
   MX_TIM8_Init();
-  MX_USART1_UART_Init();
-  MX_USB_DEVICE_Init();
+  MX_USART1_UART_Init();*/
+  MX_USB_DEVICE_Init(0);
+	//BSP_PB_Init(BUTTON_USER, BUTTON_MODE_GPIO);
 
   /* USER CODE BEGIN 2 */
 	uint8_t HIDBuffer[8];
-	HAL_ADC_Start(&hadc1);
-	BSP_ACCELERO_Init();
+	//HAL_ADC_Start(&hadc1);
+	//BSP_ACCELERO_Init();
 	int16_t accData[3];
+	uint8_t data[] = {'t', 'e', 's', 't'};
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -121,21 +125,29 @@ int main(void)
   {
   /* USER CODE END WHILE */
   /* USER CODE BEGIN 3 */
-		
-		BSP_ACCELERO_Reset();
-		BSP_ACCELERO_GetXYZ(accData);
-		
-		//uint8_t ad = readADC1(1);
-		//HIDBuffer[2] = (uint8_t) accData[2]>>8;
-		HIDBuffer[0] = ~(GPIOD->IDR&0x00FF);
-		HIDBuffer[1] = ~(((GPIOD->IDR&0x0F00)|(GPIOB->IDR&0xF000))>>8);
-		HIDBuffer[2] = (uint8_t) (accData[0]>>8);
-		HIDBuffer[3] = (uint8_t) (accData[2]>>8);
-		//HIDBuffer[3] = (uint8_t) (ad>>4);
-		USBD_HID_SendReport(&hUsbDeviceFS, HIDBuffer, 8);
-		HAL_Delay(30);
-		BSP_LED_Toggle(LED_BLUE);
-
+		/*MX_USB_DEVICE_Init(1);
+		while(BSP_PB_GetState(BUTTON_USER)){
+			BSP_ACCELERO_Reset();
+			BSP_ACCELERO_GetXYZ(accData);
+			
+			//uint8_t ad = readADC1(1);
+			//HIDBuffer[2] = (uint8_t) accData[2]>>8;
+			HIDBuffer[0] = ~(GPIOD->IDR&0x00FF);
+			HIDBuffer[1] = ~(((GPIOD->IDR&0x0F00)|(GPIOB->IDR&0xF000))>>8);
+			HIDBuffer[2] = (uint8_t) (accData[0]>>8);
+			HIDBuffer[3] = (uint8_t) (accData[2]>>8);
+			//HIDBuffer[3] = (uint8_t) (ad>>4);
+			USBD_HID_SendReport(&hUsbDeviceFS, HIDBuffer, 8);
+			HAL_Delay(30);
+			BSP_LED_Toggle(LED_BLUE);
+		}
+		while(!BSP_PB_GetState(BUTTON_USER));
+		MX_USB_DEVICE_Init(0);
+		while(BSP_PB_GetState(BUTTON_USER)){*/
+			//USBD_CDC_SetTxBuffer(&hUsbDeviceFS, (uint8_t *)data, 4);
+			HAL_Delay(30);
+		/*}
+		while(!BSP_PB_GetState(BUTTON_USER));*/
   }
   /* USER CODE END 3 */
 
