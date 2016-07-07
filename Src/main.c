@@ -61,7 +61,7 @@ void SystemClock_Config(void);
 
 /* USER CODE BEGIN 0 */
 
-uint16_t readADC1(uint8_t channel)
+uint32_t readADC1(uint8_t channel)
 {
 	ADC_ChannelConfTypeDef def;
 	def.Channel = channel;
@@ -125,15 +125,17 @@ int main(void)
 		BSP_ACCELERO_Reset();
 		BSP_ACCELERO_GetXYZ(accData);
 		
-		//uint8_t ad = readADC1(1);
+		uint32_t ad = readADC1(ADC_CHANNEL_2);
+		uint32_t ad2 = readADC1(ADC_CHANNEL_3);
 		//HIDBuffer[2] = (uint8_t) accData[2]>>8;
 		HIDBuffer[0] = ~(GPIOD->IDR&0x00FF);
 		HIDBuffer[1] = ~(((GPIOD->IDR&0x0F00)|(GPIOB->IDR&0xF000))>>8);
 		HIDBuffer[2] = (uint8_t) (accData[0]>>8);
-		HIDBuffer[3] = (uint8_t) (accData[2]>>8);
-		//HIDBuffer[3] = (uint8_t) (ad>>4);
+		//HIDBuffer[3] = (uint8_t) (accData[2]>>8);
+		HIDBuffer[4] = (uint8_t) (((uint8_t)(ad>>4))-0x7f);
+		HIDBuffer[5] = (uint8_t) (((uint8_t)(ad2>>4))-0x7f);
 		USBD_HID_SendReport(&hUsbDeviceFS, HIDBuffer, 8);
-		HAL_Delay(30);
+		HAL_Delay(20);
 		BSP_LED_Toggle(LED_BLUE);
 
   }
