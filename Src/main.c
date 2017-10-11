@@ -38,6 +38,7 @@
 #include "usart.h"
 #include "usb_device.h"
 #include "gpio.h"
+#include "math.h"
 
 /* USER CODE BEGIN Includes */
 #include "usbd_hid.h"
@@ -56,7 +57,7 @@ void SystemClock_Config(void);
 
 /* USER CODE BEGIN PFP */
 /* Private function prototypes -----------------------------------------------*/
-
+#define M_PI 3.14159265358979323846
 /* USER CODE END PFP */
 
 /* USER CODE BEGIN 0 */
@@ -113,6 +114,7 @@ int main(void)
 	HAL_ADC_Start(&hadc1);
 	BSP_ACCELERO_Init();
 	int16_t accData[3];
+	int i = 0;
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -130,13 +132,24 @@ int main(void)
 		//HIDBuffer[2] = (uint8_t) accData[2]>>8;
 		HIDBuffer[0] = ~(GPIOD->IDR&0x00FF);
 		HIDBuffer[1] = ~(((GPIOD->IDR&0x0F00)|(GPIOB->IDR&0xF000))>>8);
-		HIDBuffer[2] = (uint8_t) (accData[0]>>8);
-		//HIDBuffer[3] = (uint8_t) (accData[2]>>8);
+		
+		float x = (float)accData[0];
+		float y = (float)accData[1];
+		float z = (float)accData[2];
+		
+		float roll = atan(-x/y)/M_PI;
+		float pitch = atan(-z/sqrt((x*x)+(y*y)))/M_PI;
+		
+		HIDBuffer[2] = (uint8_t) ((roll+1.0f)*255.99f);
+		HIDBuffer[3] = (uint8_t) ((pitch+1.0f)*255.99f);
 		HIDBuffer[4] = (uint8_t) (((uint8_t)(ad>>4))-0x7f);
 		HIDBuffer[5] = (uint8_t) (((uint8_t)(ad2>>4))-0x7f);
 		USBD_HID_SendReport(&hUsbDeviceFS, HIDBuffer, 8);
-		HAL_Delay(20);
-		BSP_LED_Toggle(LED_BLUE);
+		HAL_Delay(16);
+		i++;
+		i = i%8;
+		
+		BSP_LED_Toggle(i);
 
   }
   /* USER CODE END 3 */
