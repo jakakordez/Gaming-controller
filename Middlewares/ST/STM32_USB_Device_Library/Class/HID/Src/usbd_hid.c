@@ -223,7 +223,7 @@ __ALIGN_BEGIN static uint8_t HID_MOUSE_ReportDesc[HID_MOUSE_REPORT_DESC_SIZE]  _
       0xA1,   0x00, // COLLECTION (Physical)
       0x05,   0x09, // USAGE_PAGE (Button)
       0x19,   0x01, // USAGE_MINIMUM (Button 1)
-      0x19,   0x10, // USAGE_MAXIMUM (Button 16)
+      0x29,   0x10, // USAGE_MAXIMUM (Button 16)
  
       0x15,   0x00, // LOGICAL_MINIMUM (0)
       0x25,   0x01, // LOGICAL_MAXIMUM (1)
